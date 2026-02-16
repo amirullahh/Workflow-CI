@@ -290,12 +290,12 @@ with mlflow.start_run(run_name=f"CI_RF_{datetime.now().strftime('%Y%m%d_%H%M%S')
     conda_env = {
         'channels': ['conda-forge', 'defaults'],
         'dependencies': [
-            'python=3.12',
+            'python=3.12.7',
             'pip',
             {
                 'pip': [
                     'setuptools==69.0.0',
-                    'mlflow==2.11.3',
+                    'mlflow==2.19.0',
                     'scikit-learn==1.4.0',
                     'pandas==2.2.0',
                     'numpy==1.26.3',

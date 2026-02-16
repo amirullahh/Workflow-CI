@@ -13,8 +13,8 @@ on:
   workflow_dispatch:  # Manual trigger
 
 env:
-  PYTHON_VERSION: '3.12'
-  MLFLOW_VERSION: '2.11.3'
+  PYTHON_VERSION: '3.12.7'
+  MLFLOW_VERSION: '2.19.0'
 
 jobs:
   train-model:

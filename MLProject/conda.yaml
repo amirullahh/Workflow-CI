@@ -1,17 +1,20 @@
 # MLflow Project Environment for House Prices CI Pipeline
 # Author: Amirullah
-# Python: 3.12
+# Python: 3.12.7
 
 name: mlflow-house-prices-ci
 channels:
   - conda-forge
   - defaults
 dependencies:
-  - python=3.12
+  - python=3.12.7
   - pip
   - pip:
+      # Core dependencies
+      - setuptools==69.0.0
+
       # Core ML & MLflow
-      - mlflow==2.11.3
+      - mlflow==2.19.0
       - scikit-learn==1.4.0
       - pandas==2.2.0
       - numpy==1.26.3
