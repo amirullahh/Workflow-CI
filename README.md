@@ -135,19 +135,19 @@ The GitHub Actions workflow automatically runs when:
 cd MLProject
 mlflow models build-docker \
   --model-uri mlruns/<experiment_id>/<run_id>/artifacts/model \
-  --name your-dockerhub-username/house-prices-model:latest
+  --name your-dockerhub-username/msml-model:latest
 ```
 
 ### Push to Docker Hub
 
 ```bash
-docker push your-dockerhub-username/house-prices-model:latest
+docker push your-dockerhub-username/msml-model:latest
 ```
 
 ### Run Model Container
 
 ```bash
-docker run -p 5000:8080 your-dockerhub-username/house-prices-model:latest
+docker run -p 5000:8080 your-dockerhub-username/msml-model:latest
 ```
 
 ### Make Predictions
@@ -283,7 +283,7 @@ This project is for educational purposes (Dicoding submission).
 - **GitHub Repository:** https://github.com/amirullahh/Workflow-CI
 - **Preprocessing Repository:** https://github.com/amirullahh/Eksperimen_SML_Amirullah
 - **DagsHub (Model Training):** https://dagshub.com/amirullahh/MSML-Amirullah
-- **Docker Hub:** https://hub.docker.com/r/[your-username]/house-prices-model
+- **Docker Hub:** https://hub.docker.com/r/amirullahh/msml-model
 
 ---
 

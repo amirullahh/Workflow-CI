@@ -7,19 +7,19 @@ Date: February 2026
 
 Docker Hub Repository:
 ----------------------
-URL: https://hub.docker.com/r/[YOUR_DOCKERHUB_USERNAME]/house-prices-model
+URL: https://hub.docker.com/r/amirullahh/msml-model
 
 Docker Image:
 -------------
-Image Name: [YOUR_DOCKERHUB_USERNAME]/house-prices-model:latest
+Image Name: amirullahh/msml-model:latest
 
 Pull Command:
 -------------
-docker pull [YOUR_DOCKERHUB_USERNAME]/house-prices-model:latest
+docker pull amirullahh/msml-model:latest
 
 Run Command:
 ------------
-docker run -p 5000:8080 [YOUR_DOCKERHUB_USERNAME]/house-prices-model:latest
+docker run -p 5000:8080 amirullahh/msml-model:latest
 
 Usage:
 ------
@@ -42,7 +42,14 @@ Notes:
 GitHub Actions Configuration:
 ------------------------------
 Required Secrets:
-- DOCKERHUB_USERNAME: Your Docker Hub username
+- DOCKERHUB_USERNAME: amirullahh
 - DOCKERHUB_TOKEN: Your Docker Hub access token
 
 Workflow File: .github/workflows/mlflow-ci.yml
+
+Verification:
+-------------
+Docker Hub URL: https://hub.docker.com/r/amirullahh/msml-model
+Status: ✓ Active
+Latest Push: Auto-updated by GitHub Actions workflow
+Image Size: ~2-3 GB (includes MLflow server + model + dependencies)

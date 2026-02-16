@@ -179,7 +179,7 @@ jobs:
             echo "Building Docker image for run: $RUN_ID"
             mlflow models build-docker \
               --model-uri "mlruns/${EXPERIMENT_ID}/${RUN_ID}/artifacts/model" \
-              --name "${{ secrets.DOCKERHUB_USERNAME }}/house-prices-model:latest" \
+              --name "${{ secrets.DOCKERHUB_USERNAME }}/msml-model:latest" \
               --enable-mlserver || echo "Docker build failed"
           else
             echo "No MLflow run found"
@@ -193,17 +193,17 @@ jobs:
 
     - name: 🚀 Push Docker Image to Docker Hub
       run: |
-        if docker images | grep -q "house-prices-model"; then
+        if docker images | grep -q "msml-model"; then
           echo "Pushing Docker image to Docker Hub..."
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/house-prices-model:latest || echo "Docker push failed"
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/msml-model:latest || echo "Docker push failed"
 
           echo "### 🐳 Docker Image Published" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Image:** \`${{ secrets.DOCKERHUB_USERNAME }}/house-prices-model:latest\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Image:** \`${{ secrets.DOCKERHUB_USERNAME }}/msml-model:latest\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Pull command:**" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          echo "docker pull ${{ secrets.DOCKERHUB_USERNAME }}/house-prices-model:latest" >> $GITHUB_STEP_SUMMARY
+          echo "docker pull ${{ secrets.DOCKERHUB_USERNAME }}/msml-model:latest" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
         else
           echo "No Docker image found to push"
