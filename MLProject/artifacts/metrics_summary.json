@@ -1,6 +1,6 @@
 {
     "model": "RandomForest",
-    "timestamp": "2026-02-16 10:23:24",
+    "timestamp": "2026-02-16 10:29:38",
     "environment": "CI",
     "parameters": {
         "model_type": "RandomForest",
@@ -13,16 +13,16 @@
         "environment": "CI"
     },
     "training_metrics": {
-        "rmse": 0.06157731299092928,
+        "rmse": 0.06157731299092921,
         "mae": 0.040360781425705906,
         "r2": 0.9766510185162046
     },
     "test_metrics": {
-        "rmse": 0.13175681011138438,
-        "mae": 0.09017584842871319,
+        "rmse": 0.13175681011138435,
+        "mae": 0.09017584842871314,
         "r2": 0.8780811689955982,
-        "mape": 0.7616288245949716,
-        "correlation": 0.9376095873150849
+        "mape": 0.7616288245949714,
+        "correlation": 0.9376095873150853
     },
     "data_info": {
         "train_samples": 1163,
