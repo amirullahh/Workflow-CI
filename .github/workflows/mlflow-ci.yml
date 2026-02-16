@@ -151,6 +151,8 @@ jobs:
 
     - name: 📦 Install MLflow
       run: |
+        python -m pip install --upgrade pip wheel
+        pip install setuptools==69.0.0
         pip install mlflow==${{ env.MLFLOW_VERSION }}
 
     - name: 🐳 Set up Docker Buildx
