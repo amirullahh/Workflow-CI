@@ -1,0 +1,11 @@
+name: House_Prices_CI_Pipeline
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      n_estimators: {type: int, default: 200}
+      max_depth: {type: int, default: 15}
+      random_state: {type: int, default: 42}
+    command: "python modelling.py {n_estimators} {max_depth} {random_state}"

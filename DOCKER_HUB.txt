@@ -1,0 +1,48 @@
+Docker Hub Repository Information
+=================================
+
+Author: Amirullah
+Project: House Prices ML Model - CI/CD Pipeline
+Date: February 2026
+
+Docker Hub Repository:
+----------------------
+URL: https://hub.docker.com/r/[YOUR_DOCKERHUB_USERNAME]/house-prices-model
+
+Docker Image:
+-------------
+Image Name: [YOUR_DOCKERHUB_USERNAME]/house-prices-model:latest
+
+Pull Command:
+-------------
+docker pull [YOUR_DOCKERHUB_USERNAME]/house-prices-model:latest
+
+Run Command:
+------------
+docker run -p 5000:8080 [YOUR_DOCKERHUB_USERNAME]/house-prices-model:latest
+
+Usage:
+------
+This Docker image contains the trained House Prices prediction model
+built using MLflow's build-docker command. The image automatically runs
+an MLflow model serving endpoint.
+
+Make predictions:
+curl -X POST http://localhost:5000/invocations \
+  -H 'Content-Type: application/json' \
+  -d '{"dataframe_split": {"columns": [...], "data": [[...]]}}'
+
+Notes:
+------
+- Image is automatically built and pushed by GitHub Actions workflow
+- Latest tag always points to the most recent training run
+- Image includes MLflow model server and all dependencies
+- Built using: mlflow models build-docker
+
+GitHub Actions Configuration:
+------------------------------
+Required Secrets:
+- DOCKERHUB_USERNAME: Your Docker Hub username
+- DOCKERHUB_TOKEN: Your Docker Hub access token
+
+Workflow File: .github/workflows/mlflow-ci.yml
