@@ -167,26 +167,49 @@ jobs:
       run: |
         cd MLProject
 
-        # Check if model directory exists
-        if [ -d "mlruns" ]; then
-          echo "MLruns directory found, building Docker image..."
-
-          # Find the latest run
-          RUN_ID=$(find mlruns -name "meta.yaml" | head -1 | sed 's|/meta.yaml||' | xargs basename)
-          EXPERIMENT_ID=$(find mlruns -maxdepth 1 -type d -name "[0-9]*" | head -1 | xargs basename)
-
-          if [ ! -z "$RUN_ID" ]; then
-            echo "Building Docker image for run: $RUN_ID"
-            mlflow models build-docker \
-              --model-uri "mlruns/${EXPERIMENT_ID}/${RUN_ID}/artifacts/model" \
-              --name "${{ secrets.DOCKERHUB_USERNAME }}/msml-model:latest" \
-              --enable-mlserver || echo "Docker build failed"
-          else
-            echo "No MLflow run found"
-          fi
-        else
-          echo "MLruns directory not found, skipping Docker build"
+        # Check if mlruns exists
+        if [ ! -d "mlruns" ]; then
+          echo "❌ MLruns directory not found"
+          exit 1
         fi
+
+        echo "✓ MLruns directory found"
+
+        # Find experiment and run
+        EXPERIMENT_ID=$(ls -1 mlruns | grep '^[0-9]' | head -1)
+        if [ -z "$EXPERIMENT_ID" ]; then
+          echo "❌ No experiment found"
+          exit 1
+        fi
+        echo "✓ Experiment ID: $EXPERIMENT_ID"
+
+        RUN_ID=$(ls -1 mlruns/$EXPERIMENT_ID | grep '^[a-f0-9]' | head -1)
+        if [ -z "$RUN_ID" ]; then
+          echo "❌ No run found"
+          exit 1
+        fi
+        echo "✓ Run ID: $RUN_ID"
+
+        MODEL_PATH="mlruns/${EXPERIMENT_ID}/${RUN_ID}/artifacts/model"
+
+        # Verify model directory exists
+        if [ ! -d "$MODEL_PATH" ]; then
+          echo "❌ Model not found at: $MODEL_PATH"
+          exit 1
+        fi
+        echo "✓ Model found at: $MODEL_PATH"
+
+        # List model contents
+        echo "Model contents:"
+        ls -la "$MODEL_PATH"
+
+        # Build Docker image
+        echo "🐳 Building Docker image..."
+        mlflow models build-docker \
+          --model-uri "$MODEL_PATH" \
+          --name "${{ secrets.DOCKERHUB_USERNAME }}/msml-model:latest"
+
+        echo "✓ Docker image built successfully"
       continue-on-error: true
       env:
         DOCKER_BUILDKIT: 1

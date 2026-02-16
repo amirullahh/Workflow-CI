@@ -279,12 +279,39 @@ with mlflow.start_run(run_name=f"CI_RF_{datetime.now().strftime('%Y%m%d_%H%M%S')
     # Log model file as artifact
     mlflow.log_artifact(model_path)
 
-    # Log model to MLflow Model Registry
+    # Log model to MLflow Model Registry with signature
     print("   Logging model to MLflow registry...")
+    from mlflow.models.signature import infer_signature
+
+    # Infer model signature from training data
+    signature = infer_signature(X_train, y_train_pred)
+
+    # Create conda environment spec
+    conda_env = {
+        'channels': ['conda-forge', 'defaults'],
+        'dependencies': [
+            'python=3.12',
+            'pip',
+            {
+                'pip': [
+                    'mlflow==2.11.3',
+                    'scikit-learn==1.4.0',
+                    'pandas==2.2.0',
+                    'numpy==1.26.3',
+                    'cloudpickle==3.0.0',
+                ]
+            }
+        ],
+        'name': 'mlflow-env'
+    }
+
     mlflow.sklearn.log_model(
         model,
         "model",
-        registered_model_name="RandomForest_CI_HousePrices"
+        conda_env=conda_env,
+        signature=signature,
+        registered_model_name="RandomForest_CI_HousePrices",
+        input_example=X_train.iloc[:5]  # Add input example
     )
 
     print("[OK] Artifacts created and logged")
