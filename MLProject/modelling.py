@@ -294,6 +294,7 @@ with mlflow.start_run(run_name=f"CI_RF_{datetime.now().strftime('%Y%m%d_%H%M%S')
             'pip',
             {
                 'pip': [
+                    'setuptools==69.0.0',
                     'mlflow==2.11.3',
                     'scikit-learn==1.4.0',
                     'pandas==2.2.0',
